@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>note</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: 宋体;
+        }
+        body{
+            background: #e9eaed;
+        }
+        header{
+            width: 100%;
+            height: 88px;
+            background: #9a9a9a;
+        }
+        header > h1{
+            width: 1220px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        header > form{
+            width: 1220px;
+            margin: 0 auto;
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+        header > form > input{
+            border: none;
+            height: 30px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+        header > form > input:nth-child(1){
+            width: 200px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        header > form > input:nth-child(2){
+            padding: 0 15px;
+            box-sizing: border-box;
+            background: #99a5c2;
+        }
+        .box{
+            width: 1220px;
+            display: block;
+            padding: 10px;
+            box-sizing: border-box;
+            margin: 50px auto 0;
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        ul{
+            width: 1200px;
+            position: relative;
+            display: flex;
+        }
+        ul > li{
+            width: 400px;
+            height: 40px;
+            flex-grow: 1;
+            color: #000;
+            line-height: 40px;
+            text-align: center;
+            z-index: 2;
+            border-radius: 10px;
+            transition: all ease .5s;
+        }
+        .color{
+            width: 400px;
+            height: 40px;
+            border-radius: 10px;
+            background: #00c1de;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            transition: all ease .5s;
+        }
+        .hot{
+            color: #ffffff;
+        }
+        .box > ul > li.hot:nth-child(1) ~ .color{
+             transform: translate(0,0);
+         }
+        .box > ul > li.hot:nth-child(2) ~ .color{
+            transform: translate(100%,0);
+        }
+        .box > ul > li.hot:nth-child(3) ~ .color{
+            transform: translate(200%,0);
+        }
+        ol{
+            width: 100%;
+            margin-top: 10px;
+        }
+        ol > li{
+            height: 60px;
+            padding: 0 15px;
+            border-bottom: 1px dashed #000000;
+            line-height: 60px;
+            color: #000;
+        }
+        ol > li > p{
+            display: inline-block;
+        }
+        ol > li > del{
+            text-decoration: none;
+            float: right;
+            color: red;
+            margin-left: 10px;
+        }
+        ol > li > time{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>备忘录</h1>
+    <form action="">
+        <input type="text" placeholder="请输入待办事项" name="content">
+        <input type="submit" name="upload">
+    </form>
+</header>
+<div class="box">
+    <ul>
+        <li class="hot" type="all">全部</li>
+        <li type="done">完成</li>
+        <li type="doing">未完成</li>
+    <div class="color"></div>
+    </ul>
+    <ol class="content">
+    </ol>
+</div>
+<script src="note.js">
+</script>
+</body>
+</html>
