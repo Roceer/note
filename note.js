@@ -1,6 +1,5 @@
-/*
 //先定义好数组内容，获取类型，针对类型筛选数组数据对应的渲染好的列表中
-window.addEventListener("load",function(){
+/*window.addEventListener("load",function(){
     let taskList = [
         {
             id: 1,  content:"竹杖芒鞋轻胜马",  time:"2019/6/6",  status:false
@@ -25,12 +24,12 @@ window.addEventListener("load",function(){
     submit.onclick = function(e){
         e.preventDefault();
         let obj = creatObj();
-        console.log(obj);
         taskList.push(obj);
         render(filterType(type));
         saveData();
     }
 
+    //全部完成与未完成li点击事件
     let lis = document.querySelectorAll("ul > li");
     let content = document.querySelector(".content");
     let prev = 0;
@@ -44,7 +43,7 @@ window.addEventListener("load",function(){
             render(filterType(type));
         }
     }
-    lis[0].onclick();
+    lis[0].onclick();//默认第一个有点击事件
 
     /!* *
     * 数据 ——> 视图、视图 ——> 数据
@@ -148,8 +147,7 @@ window.addEventListener("load",function(){
         content.innerHTML = html;
         }
 
-})
-*/
+})*/
 
 $(function(){
     let taskList = [
@@ -169,11 +167,14 @@ $(function(){
 
     let lis = $("ul > li");
     let content = $(".content");
+    let text = $(":text");
+    let submit = $(":submit");
     let type = "all";
     lis.on("click",function(){
         let This = $(this);
-        let type = This.attr("type");//返回This的属性值
-        This.addClass("hot").siblings("li").removeClass("hot");//给This添加hot类，并通过siblings的方法获取this的同辈元素并移除同辈元素的hot类
+        This.addClass("hot").siblings("li").removeClass("hot");
+        //给This添加hot类，并通过siblings的方法获取this的同辈元素并移除同辈元素的hot类
+        type = This.attr("type");//返回This的属性值
         render(filterType(type));
     })
     lis.triggerHandler("click");//触发事件中第一个元素的事件处理函数
@@ -188,6 +189,7 @@ $(function(){
         render(filterType(type));
         saveData();
     })
+
     content.on("click","del",function(){
         let This = $(this);
         //找父元素li的下标 This.parent     This.closest
@@ -199,6 +201,14 @@ $(function(){
         saveData();
     })
 
+    submit.on("click" , function(e){
+        e.preventDefault();
+        let obj = creatObj();
+        taskList.push(obj);
+        render(filterType(type));
+        saveData();
+    })
+
     function filterType(type){
         let arr = [];
         switch (type) {
@@ -206,35 +216,40 @@ $(function(){
                 arr = taskList;
                 break;
             case "done":
-                // arr = taskList.filter(ele=>ele.status);
-                arr = taskList.filter(function(ele){
+                arr = taskList.filter(ele=>ele.status);
+                /*arr = taskList.filter(function(ele){
                     return ele.status;
-                });
+                });*/
                 break;
             case "doing":
-                // arr = taskList.filter(ele=>!ele.status);
-                arr = taskList.filter(function(ele){
+                arr = taskList.filter(ele=>!ele.status);
+                /*arr = taskList.filter(function(ele){
                     return !ele.status;
-                });
+                });*/
                 break;
         }
         return arr;
+    }
+
+    let str = localStorage.getItem("taskList");
+    if (!str){
+        saveData();
+        str = loaclStorage.getItem("taskList");
+    }taskList = JSON.parse(str);
+
+    function saveData(){
+        localStorage.setItem("taskList",JSON.stringify(taskList));
     }
 
     //创建数组对象
     function creatObj(){
         // let id = taskList[taskList.length - 1].id + 1;
         let id = taskList.length + 1;
-        let content = text.value;
+        let content = text.val();
         let time = new Date().toLocaleDateString();
         let status = false;
         return {id,content,time,status};
     }
-
-    function saveData(){
-        localStorage.setItem("taskList",JSON.stringify(taskList));
-    }
-
     //渲染
     function render(arr){
         let html = ``;
