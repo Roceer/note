@@ -97,6 +97,7 @@
         ol{
             width: 100%;
             margin-top: 10px;
+            padding-bottom: 20px;
         }
         ol > li{
             height: 60px;
@@ -118,13 +119,14 @@
             float: right;
         }
     </style>
+    <script src="jquery-3.4.1.js"></script>
 </head>
 <body>
 <header>
     <h1>备忘录</h1>
     <form action="">
-        <input type="text" placeholder="请输入待办事项" name="content">
-        <input type="submit" name="upload">
+        <input type="text" placeholder="请输入待办事项" name="content" id="content">
+        <input type="submit" name="upload" id="upload" value="添加">
     </form>
 </header>
 <div class="box">
@@ -132,12 +134,11 @@
         <li class="hot" type="all">全部</li>
         <li type="done">完成</li>
         <li type="doing">未完成</li>
-    <div class="color"></div>
+        <div class="color"></div>
     </ul>
     <ol class="content">
     </ol>
 </div>
-<script src="note.js">
-</script>
+<script src="note.js"></script>
 </body>
 </html>
